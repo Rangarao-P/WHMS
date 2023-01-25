@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WHMS_DB_NewModelStoreContainer" CdmEntityContainer="WHMS_DB_NewEntities">
+    <EntitySetMapping Name="Drivers">
+      <EntityTypeMapping TypeName="WHMS_DB_NewModel.Driver">
+        <MappingFragment StoreEntitySet="Driver">
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LicenseNumber" ColumnName="LicenseNumber" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="RatePerKm" ColumnName="RatePerKm" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InLedgers">
+      <EntityTypeMapping TypeName="WHMS_DB_NewModel.InLedger">
+        <MappingFragment StoreEntitySet="InLedger">
+          <ScalarProperty Name="LedgerID" ColumnName="LedgerID" />
+          <ScalarProperty Name="InDate" ColumnName="InDate" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
+          <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+          <ScalarProperty Name="SupplierLocation" ColumnName="SupplierLocation" />
+          <ScalarProperty Name="PoNumber" ColumnName="PoNumber" />
+          <ScalarProperty Name="PoDate" ColumnName="PoDate" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InLedgerLocations">
+      <EntityTypeMapping TypeName="WHMS_DB_NewModel.InLedgerLocation">
+        <MappingFragment StoreEntitySet="InLedgerLocation">
+          <ScalarProperty Name="InLedgerId" ColumnName="InLedgerId" />
+          <ScalarProperty Name="LedgerId" ColumnName="LedgerId" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="WHMS_DB_NewModel.Location">
+        <MappingFragment StoreEntitySet="Location">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="Width" ColumnName="Width" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Logistics">
+      <EntityTypeMapping TypeName="WHMS_DB_NewModel.Logistic">
+        <MappingFragment StoreEntitySet="Logistics">
+          <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="TruckId" ColumnName="TruckId" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+          <ScalarProperty Name="PickupLocation" ColumnName="PickupLocation" />
+          <ScalarProperty Name="DeliveryLocation" ColumnName="DeliveryLocation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OutLedgers">
+      <EntityTypeMapping TypeName="WHMS_DB_NewModel.OutLedger">
+        <MappingFragment StoreEntitySet="OutLedger">
+          <ScalarProperty Name="LedgerID" ColumnName="LedgerID" />
+          <ScalarProperty Name="OutDate" ColumnName="OutDate" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="DeliveryLocation" ColumnName="DeliveryLocation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OutLedgerLocations">
+      <EntityTypeMapping TypeName="WHMS_DB_NewModel.OutLedgerLocation">
+        <MappingFragment StoreEntitySet="OutLedgerLocation">
+          <ScalarProperty Name="OutLedgerId" ColumnName="OutLedgerId" />
+          <ScalarProperty Name="LedgerId" ColumnName="LedgerId" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="WHMS_DB_NewModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="Product_Nature" ColumnName="Product_Nature" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CurrentStock" ColumnName="CurrentStock" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="Width" ColumnName="Width" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Product_Area" ColumnName="Product_Area" />
+          <ScalarProperty Name="Threshold_Quantity" ColumnName="Threshold_Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trucks">
+      <EntityTypeMapping TypeName="WHMS_DB_NewModel.Truck">
+        <MappingFragment StoreEntitySet="Truck">
+          <ScalarProperty Name="TruckId" ColumnName="TruckId" />
+          <ScalarProperty Name="TruckNumber" ColumnName="TruckNumber" />
+          <ScalarProperty Name="MaxLoad" ColumnName="MaxLoad" />
+          <ScalarProperty Name="assigned" ColumnName="assigned" />
+          <ScalarProperty Name="loaded" ColumnName="loaded" />
+          <ScalarProperty Name="completed" ColumnName="completed" />
+          <ScalarProperty Name="loadNature" ColumnName="loadNature" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="WHMS_DB_NewModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="EMail" ColumnName="EMail" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="createLogisticsRequest" FunctionName="WHMS_DB_NewModel.Store.createLogisticsRequest" />
+    <FunctionImportMapping FunctionImportName="sp_ChangePassword_CheckUser" FunctionName="WHMS_DB_NewModel.Store.sp_ChangePassword_CheckUser" />
+    <FunctionImportMapping FunctionImportName="sp_ChangePassword_CheckUserID" FunctionName="WHMS_DB_NewModel.Store.sp_ChangePassword_CheckUserID" />
+    <FunctionImportMapping FunctionImportName="sp_ChangePassword_EMail" FunctionName="WHMS_DB_NewModel.Store.sp_ChangePassword_EMail" />
+    <FunctionImportMapping FunctionImportName="sp_ChangePassword_UID" FunctionName="WHMS_DB_NewModel.Store.sp_ChangePassword_UID" />
+    <FunctionImportMapping FunctionImportName="SP_display_product_details" FunctionName="WHMS_DB_NewModel.Store.SP_display_product_details">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WHMS_DB_NewModel.SP_display_product_details_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CurrentStock" ColumnName="CurrentStock" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="Threshold_Quantity" ColumnName="Threshold_Quantity" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_DisplayTruckStatus" FunctionName="WHMS_DB_NewModel.Store.sp_DisplayTruckStatus">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WHMS_DB_NewModel.sp_DisplayTruckStatus_Result">
+          <ScalarProperty Name="TruckNumber" ColumnName="TruckNumber" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+          <ScalarProperty Name="DeliveryLocation" ColumnName="DeliveryLocation" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_ForgotPassword_CheckEmail" FunctionName="WHMS_DB_NewModel.Store.sp_ForgotPassword_CheckEmail" />
+    <FunctionImportMapping FunctionImportName="sp_ForgotPassword_CheckUID" FunctionName="WHMS_DB_NewModel.Store.sp_ForgotPassword_CheckUID" />
+    <FunctionImportMapping FunctionImportName="sp_InsertUser" FunctionName="WHMS_DB_NewModel.Store.sp_InsertUser" />
+    <FunctionImportMapping FunctionImportName="sp_OutLedger" FunctionName="WHMS_DB_NewModel.Store.sp_OutLedger" />
+    <FunctionImportMapping FunctionImportName="sp_UpdateQuantity" FunctionName="WHMS_DB_NewModel.Store.sp_UpdateQuantity" />
+    <FunctionImportMapping FunctionImportName="sp_updateUserType" FunctionName="WHMS_DB_NewModel.Store.sp_updateUserType" />
+    <FunctionImportMapping FunctionImportName="sp_new_locationQuery" FunctionName="WHMS_DB_NewModel.Store.sp_new_locationQuery">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WHMS_DB_NewModel.sp_new_locationQuery_Result">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="Width" ColumnName="Width" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_ProductCartDetails" FunctionName="WHMS_DB_NewModel.Store.sp_ProductCartDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WHMS_DB_NewModel.sp_ProductCartDetails_Result">
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_add_new_product" FunctionName="WHMS_DB_NewModel.Store.sp_add_new_product" />
+    <FunctionImportMapping FunctionImportName="sp_update_product_count" FunctionName="WHMS_DB_NewModel.Store.sp_update_product_count" />
+    <FunctionImportMapping FunctionImportName="sp_check_product_exit" FunctionName="WHMS_DB_NewModel.Store.sp_check_product_exit">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="WHMS_DB_NewModel.sp_check_product_exit_Result">
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="Product_Nature" ColumnName="Product_Nature" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CurrentStock" ColumnName="CurrentStock" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="Width" ColumnName="Width" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Product_Area" ColumnName="Product_Area" />
+          <ScalarProperty Name="Threshold_Quantity" ColumnName="Threshold_Quantity" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_check_product_exit_or_not" FunctionName="WHMS_DB_NewModel.Store.sp_check_product_exit_or_not" />
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WHMS_DB_NewModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Driver">
+    <Key>
+      <PropertyRef Name="DriverId" />
+    </Key>
+    <Property Name="DriverId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LicenseNumber" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="PhoneNumber" Type="int" Nullable="false" />
+    <Property Name="RatePerKm" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InLedger">
+    <Key>
+      <PropertyRef Name="LedgerID" />
+    </Key>
+    <Property Name="LedgerID" Type="int" Nullable="false" />
+    <Property Name="InDate" Type="datetime" />
+    <Property Name="Username" Type="varchar" MaxLength="20" />
+    <Property Name="ProductCode" Type="int" />
+    <Property Name="BatchNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SupplierName" Type="varchar" MaxLength="20" />
+    <Property Name="SupplierLocation" Type="varchar" MaxLength="20" />
+    <Property Name="PoNumber" Type="varchar" MaxLength="20" />
+    <Property Name="PoDate" Type="datetime" />
+    <Property Name="Quantity" Type="int" />
+  </EntityType>
+  <EntityType Name="InLedgerLocation">
+    <Key>
+      <PropertyRef Name="InLedgerId" />
+    </Key>
+    <Property Name="InLedgerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LedgerId" Type="int" Nullable="false" />
+    <Property Name="LocationId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="LocationID" />
+    </Key>
+    <Property Name="LocationID" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="30" />
+    <Property Name="StatusCode" Type="int" />
+    <Property Name="Length" Type="int" />
+    <Property Name="Width" Type="int" />
+    <Property Name="Height" Type="int" />
+  </EntityType>
+  <EntityType Name="Logistics">
+    <Key>
+      <PropertyRef Name="RequestId" />
+    </Key>
+    <Property Name="RequestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductCode" Type="int" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="TruckId" Type="int" />
+    <Property Name="DriverId" Type="int" />
+    <Property Name="DeliveryDate" Type="datetime" />
+    <Property Name="PickupLocation" Type="varchar" MaxLength="50" />
+    <Property Name="DeliveryLocation" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="OutLedger">
+    <Key>
+      <PropertyRef Name="LedgerID" />
+    </Key>
+    <Property Name="LedgerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OutDate" Type="datetime" />
+    <Property Name="ProductCode" Type="int" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="DeliveryLocation" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="OutLedgerLocation">
+    <Key>
+      <PropertyRef Name="OutLedgerId" />
+    </Key>
+    <Property Name="OutLedgerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LedgerId" Type="int" Nullable="false" />
+    <Property Name="LocationId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductCode" />
+    </Key>
+    <Property Name="ProductCode" Type="int" Nullable="false" />
+    <Property Name="Product_Nature" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CurrentStock" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Length" Type="int" />
+    <Property Name="Width" Type="int" />
+    <Property Name="Height" Type="int" />
+    <Property Name="Weight" Type="int" Nullable="false" />
+    <Property Name="Product_Area" Type="int" Nullable="false" />
+    <Property Name="Threshold_Quantity" Type="int" />
+  </EntityType>
+  <EntityType Name="Truck">
+    <Key>
+      <PropertyRef Name="TruckId" />
+    </Key>
+    <Property Name="TruckId" Type="int" Nullable="false" />
+    <Property Name="TruckNumber" Type="int" Nullable="false" />
+    <Property Name="MaxLoad" Type="int" Nullable="false" />
+    <Property Name="assigned" Type="bit" />
+    <Property Name="loaded" Type="bit" />
+    <Property Name="completed" Type="bit" />
+    <Property Name="loadNature" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EMail" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserType" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__InLedger__Produc__1FCDBCEB">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="InLedger" Type="Self.InLedger" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductCode" />
+      </Principal>
+      <Dependent Role="InLedger">
+        <PropertyRef Name="ProductCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InLedger__Userna__1ED998B2">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="InLedger" Type="Self.InLedger" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="InLedger">
+        <PropertyRef Name="Username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InLedgerL__Ledge__22AA2996">
+    <End Role="InLedger" Type="Self.InLedger" Multiplicity="1" />
+    <End Role="InLedgerLocation" Type="Self.InLedgerLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InLedger">
+        <PropertyRef Name="LedgerID" />
+      </Principal>
+      <Dependent Role="InLedgerLocation">
+        <PropertyRef Name="LedgerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InLedgerL__Locat__239E4DCF">
+    <End Role="Location" Type="Self.Location" Multiplicity="1" />
+    <End Role="InLedgerLocation" Type="Self.InLedgerLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="LocationID" />
+      </Principal>
+      <Dependent Role="InLedgerLocation">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Logistics__Drive__3D5E1FD2">
+    <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
+    <End Role="Logistics" Type="Self.Logistics" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Driver">
+        <PropertyRef Name="DriverId" />
+      </Principal>
+      <Dependent Role="Logistics">
+        <PropertyRef Name="DriverId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Logistics__Produ__403A8C7D">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Logistics" Type="Self.Logistics" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductCode" />
+      </Principal>
+      <Dependent Role="Logistics">
+        <PropertyRef Name="ProductCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Logistics__Truck__46E78A0C">
+    <End Role="Truck" Type="Self.Truck" Multiplicity="0..1" />
+    <End Role="Logistics" Type="Self.Logistics" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Truck">
+        <PropertyRef Name="TruckId" />
+      </Principal>
+      <Dependent Role="Logistics">
+        <PropertyRef Name="TruckId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OutLedger__Ledge__29572725">
+    <End Role="OutLedger" Type="Self.OutLedger" Multiplicity="1" />
+    <End Role="OutLedgerLocation" Type="Self.OutLedgerLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OutLedger">
+        <PropertyRef Name="LedgerID" />
+      </Principal>
+      <Dependent Role="OutLedgerLocation">
+        <PropertyRef Name="LedgerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OutLedger__Locat__2A4B4B5E">
+    <End Role="Location" Type="Self.Location" Multiplicity="1" />
+    <End Role="OutLedgerLocation" Type="Self.OutLedgerLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="LocationID" />
+      </Principal>
+      <Dependent Role="OutLedgerLocation">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OutLedger__Produ__267ABA7A">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="OutLedger" Type="Self.OutLedger" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductCode" />
+      </Principal>
+      <Dependent Role="OutLedger">
+        <PropertyRef Name="ProductCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="createLogisticsRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pcode" Type="int" Mode="In" />
+    <Parameter Name="pname" Type="varchar" Mode="In" />
+    <Parameter Name="quantity" Type="int" Mode="In" />
+    <Parameter Name="pnature" Type="varchar" Mode="In" />
+    <Parameter Name="parea" Type="int" Mode="In" />
+    <Parameter Name="weight" Type="int" Mode="In" />
+    <Parameter Name="pickup" Type="varchar" Mode="In" />
+    <Parameter Name="drop" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_add_new_product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="productcode" Type="int" Mode="In" />
+    <Parameter Name="productnature" Type="varchar" Mode="In" />
+    <Parameter Name="name" Type="varchar" Mode="In" />
+    <Parameter Name="currentstock" Type="decimal" Mode="In" />
+    <Parameter Name="length" Type="int" Mode="In" />
+    <Parameter Name="width" Type="int" Mode="In" />
+    <Parameter Name="height" Type="int" Mode="In" />
+    <Parameter Name="weight" Type="int" Mode="In" />
+    <Parameter Name="productarea" Type="int" Mode="In" />
+    <Parameter Name="threshold" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_ChangePassword_CheckUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="pwd" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_ChangePassword_CheckUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="uid" Type="varchar" Mode="In" />
+    <Parameter Name="pwd" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_ChangePassword_EMail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="pwd" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_ChangePassword_UID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="uid" Type="varchar" Mode="In" />
+    <Parameter Name="pwd" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_check_product_exit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="productcode" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_check_product_exit_or_not" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="productcode" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_display_product_details" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_DisplayTruckStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RequestId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_ForgotPassword_CheckEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="email" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_ForgotPassword_CheckUID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_InsertUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="username" Type="varchar" Mode="In" />
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+    <Parameter Name="EMail" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_new_locationQuery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="productCode" Type="int" Mode="In" />
+    <Parameter Name="Quantity" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_OutLedger" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="productcode" Type="int" Mode="In" />
+    <Parameter Name="deliverylocation" Type="varchar" Mode="In" />
+    <Parameter Name="quantity" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_ProductCartDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_update_product_count" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="productcode" Type="int" Mode="In" />
+    <Parameter Name="quantity" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_UpdateQuantity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="productcode" Type="int" Mode="In" />
+    <Parameter Name="quantity" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="sp_updateUserType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="uid" Type="varchar" Mode="In" />
+    <Parameter Name="utype" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="WHMS_DB_NewModelStoreContainer">
+    <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InLedger" EntityType="Self.InLedger" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InLedgerLocation" EntityType="Self.InLedgerLocation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Logistics" EntityType="Self.Logistics" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OutLedger" EntityType="Self.OutLedger" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OutLedgerLocation" EntityType="Self.OutLedgerLocation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Truck" EntityType="Self.Truck" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__InLedger__Produc__1FCDBCEB" Association="Self.FK__InLedger__Produc__1FCDBCEB">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="InLedger" EntitySet="InLedger" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InLedger__Userna__1ED998B2" Association="Self.FK__InLedger__Userna__1ED998B2">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="InLedger" EntitySet="InLedger" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InLedgerL__Ledge__22AA2996" Association="Self.FK__InLedgerL__Ledge__22AA2996">
+      <End Role="InLedger" EntitySet="InLedger" />
+      <End Role="InLedgerLocation" EntitySet="InLedgerLocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InLedgerL__Locat__239E4DCF" Association="Self.FK__InLedgerL__Locat__239E4DCF">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="InLedgerLocation" EntitySet="InLedgerLocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Logistics__Drive__3D5E1FD2" Association="Self.FK__Logistics__Drive__3D5E1FD2">
+      <End Role="Driver" EntitySet="Driver" />
+      <End Role="Logistics" EntitySet="Logistics" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Logistics__Produ__403A8C7D" Association="Self.FK__Logistics__Produ__403A8C7D">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Logistics" EntitySet="Logistics" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Logistics__Truck__46E78A0C" Association="Self.FK__Logistics__Truck__46E78A0C">
+      <End Role="Truck" EntitySet="Truck" />
+      <End Role="Logistics" EntitySet="Logistics" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OutLedger__Ledge__29572725" Association="Self.FK__OutLedger__Ledge__29572725">
+      <End Role="OutLedger" EntitySet="OutLedger" />
+      <End Role="OutLedgerLocation" EntitySet="OutLedgerLocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OutLedger__Locat__2A4B4B5E" Association="Self.FK__OutLedger__Locat__2A4B4B5E">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="OutLedgerLocation" EntitySet="OutLedgerLocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OutLedger__Produ__267ABA7A" Association="Self.FK__OutLedger__Produ__267ABA7A">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="OutLedger" EntitySet="OutLedger" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

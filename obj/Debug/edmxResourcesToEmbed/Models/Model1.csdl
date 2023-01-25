@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WHMS_DB_NewModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Driver">
+    <Key>
+      <PropertyRef Name="DriverId" />
+    </Key>
+    <Property Name="DriverId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LicenseNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PhoneNumber" Type="Int32" Nullable="false" />
+    <Property Name="RatePerKm" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Logistics" Relationship="Self.FK__Logistics__Drive__3D5E1FD2" FromRole="Driver" ToRole="Logistics" />
+  </EntityType>
+  <EntityType Name="InLedger">
+    <Key>
+      <PropertyRef Name="LedgerID" />
+    </Key>
+    <Property Name="LedgerID" Type="Int32" Nullable="false" />
+    <Property Name="InDate" Type="DateTime" Precision="3" />
+    <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ProductCode" Type="Int32" />
+    <Property Name="BatchNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SupplierName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="SupplierLocation" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PoNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="PoDate" Type="DateTime" Precision="3" />
+    <Property Name="Quantity" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__InLedger__Produc__1FCDBCEB" FromRole="InLedger" ToRole="Product" />
+    <NavigationProperty Name="User" Relationship="Self.FK__InLedger__Userna__1ED998B2" FromRole="InLedger" ToRole="Users" />
+    <NavigationProperty Name="InLedgerLocations" Relationship="Self.FK__InLedgerL__Ledge__22AA2996" FromRole="InLedger" ToRole="InLedgerLocation" />
+  </EntityType>
+  <EntityType Name="InLedgerLocation">
+    <Key>
+      <PropertyRef Name="InLedgerId" />
+    </Key>
+    <Property Name="InLedgerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LedgerId" Type="Int32" Nullable="false" />
+    <Property Name="LocationId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="InLedger" Relationship="Self.FK__InLedgerL__Ledge__22AA2996" FromRole="InLedgerLocation" ToRole="InLedger" />
+    <NavigationProperty Name="Location" Relationship="Self.FK__InLedgerL__Locat__239E4DCF" FromRole="InLedgerLocation" ToRole="Location" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="LocationID" />
+    </Key>
+    <Property Name="LocationID" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="StatusCode" Type="Int32" />
+    <Property Name="Length" Type="Int32" />
+    <Property Name="Width" Type="Int32" />
+    <Property Name="Height" Type="Int32" />
+    <NavigationProperty Name="InLedgerLocations" Relationship="Self.FK__InLedgerL__Locat__239E4DCF" FromRole="Location" ToRole="InLedgerLocation" />
+    <NavigationProperty Name="OutLedgerLocations" Relationship="Self.FK__OutLedger__Locat__2A4B4B5E" FromRole="Location" ToRole="OutLedgerLocation" />
+  </EntityType>
+  <EntityType Name="Logistic">
+    <Key>
+      <PropertyRef Name="RequestId" />
+    </Key>
+    <Property Name="RequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductCode" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="TruckId" Type="Int32" />
+    <Property Name="DriverId" Type="Int32" />
+    <Property Name="DeliveryDate" Type="DateTime" Precision="3" />
+    <Property Name="PickupLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DeliveryLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Driver" Relationship="Self.FK__Logistics__Drive__3D5E1FD2" FromRole="Logistics" ToRole="Driver" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Logistics__Produ__403A8C7D" FromRole="Logistics" ToRole="Product" />
+    <NavigationProperty Name="Truck" Relationship="Self.FK__Logistics__Truck__46E78A0C" FromRole="Logistics" ToRole="Truck" />
+  </EntityType>
+  <EntityType Name="OutLedger">
+    <Key>
+      <PropertyRef Name="LedgerID" />
+    </Key>
+    <Property Name="LedgerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OutDate" Type="DateTime" Precision="3" />
+    <Property Name="ProductCode" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="DeliveryLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="OutLedgerLocations" Relationship="Self.FK__OutLedger__Ledge__29572725" FromRole="OutLedger" ToRole="OutLedgerLocation" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__OutLedger__Produ__267ABA7A" FromRole="OutLedger" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="OutLedgerLocation">
+    <Key>
+      <PropertyRef Name="OutLedgerId" />
+    </Key>
+    <Property Name="OutLedgerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LedgerId" Type="Int32" Nullable="false" />
+    <Property Name="LocationId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Location" Relationship="Self.FK__OutLedger__Locat__2A4B4B5E" FromRole="OutLedgerLocation" ToRole="Location" />
+    <NavigationProperty Name="OutLedger" Relationship="Self.FK__OutLedger__Ledge__29572725" FromRole="OutLedgerLocation" ToRole="OutLedger" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductCode" />
+    </Key>
+    <Property Name="ProductCode" Type="Int32" Nullable="false" />
+    <Property Name="Product_Nature" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CurrentStock" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Length" Type="Int32" />
+    <Property Name="Width" Type="Int32" />
+    <Property Name="Height" Type="Int32" />
+    <Property Name="Weight" Type="Int32" Nullable="false" />
+    <Property Name="Product_Area" Type="Int32" Nullable="false" />
+    <Property Name="Threshold_Quantity" Type="Int32" />
+    <NavigationProperty Name="InLedgers" Relationship="Self.FK__InLedger__Produc__1FCDBCEB" FromRole="Product" ToRole="InLedger" />
+    <NavigationProperty Name="Logistics" Relationship="Self.FK__Logistics__Produ__403A8C7D" FromRole="Product" ToRole="Logistics" />
+    <NavigationProperty Name="OutLedgers" Relationship="Self.FK__OutLedger__Produ__267ABA7A" FromRole="Product" ToRole="OutLedger" />
+  </EntityType>
+  <EntityType Name="Truck">
+    <Key>
+      <PropertyRef Name="TruckId" />
+    </Key>
+    <Property Name="TruckId" Type="Int32" Nullable="false" />
+    <Property Name="TruckNumber" Type="Int32" Nullable="false" />
+    <Property Name="MaxLoad" Type="Int32" Nullable="false" />
+    <Property Name="assigned" Type="Boolean" />
+    <Property Name="loaded" Type="Boolean" />
+    <Property Name="completed" Type="Boolean" />
+    <Property Name="loadNature" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Logistics" Relationship="Self.FK__Logistics__Truck__46E78A0C" FromRole="Truck" ToRole="Logistics" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EMail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserType" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="InLedgers" Relationship="Self.FK__InLedger__Userna__1ED998B2" FromRole="Users" ToRole="InLedger" />
+  </EntityType>
+  <Association Name="FK__Logistics__Drive__3D5E1FD2">
+    <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
+    <End Role="Logistics" Type="Self.Logistic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Driver">
+        <PropertyRef Name="DriverId" />
+      </Principal>
+      <Dependent Role="Logistics">
+        <PropertyRef Name="DriverId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InLedger__Produc__1FCDBCEB">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="InLedger" Type="Self.InLedger" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductCode" />
+      </Principal>
+      <Dependent Role="InLedger">
+        <PropertyRef Name="ProductCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InLedger__Userna__1ED998B2">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="InLedger" Type="Self.InLedger" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="InLedger">
+        <PropertyRef Name="Username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InLedgerL__Ledge__22AA2996">
+    <End Role="InLedger" Type="Self.InLedger" Multiplicity="1" />
+    <End Role="InLedgerLocation" Type="Self.InLedgerLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InLedger">
+        <PropertyRef Name="LedgerID" />
+      </Principal>
+      <Dependent Role="InLedgerLocation">
+        <PropertyRef Name="LedgerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InLedgerL__Locat__239E4DCF">
+    <End Role="Location" Type="Self.Location" Multiplicity="1" />
+    <End Role="InLedgerLocation" Type="Self.InLedgerLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="LocationID" />
+      </Principal>
+      <Dependent Role="InLedgerLocation">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OutLedger__Locat__2A4B4B5E">
+    <End Role="Location" Type="Self.Location" Multiplicity="1" />
+    <End Role="OutLedgerLocation" Type="Self.OutLedgerLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="LocationID" />
+      </Principal>
+      <Dependent Role="OutLedgerLocation">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Logistics__Produ__403A8C7D">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Logistics" Type="Self.Logistic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductCode" />
+      </Principal>
+      <Dependent Role="Logistics">
+        <PropertyRef Name="ProductCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Logistics__Truck__46E78A0C">
+    <End Role="Truck" Type="Self.Truck" Multiplicity="0..1" />
+    <End Role="Logistics" Type="Self.Logistic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Truck">
+        <PropertyRef Name="TruckId" />
+      </Principal>
+      <Dependent Role="Logistics">
+        <PropertyRef Name="TruckId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OutLedger__Ledge__29572725">
+    <End Role="OutLedger" Type="Self.OutLedger" Multiplicity="1" />
+    <End Role="OutLedgerLocation" Type="Self.OutLedgerLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OutLedger">
+        <PropertyRef Name="LedgerID" />
+      </Principal>
+      <Dependent Role="OutLedgerLocation">
+        <PropertyRef Name="LedgerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OutLedger__Produ__267ABA7A">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="OutLedger" Type="Self.OutLedger" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductCode" />
+      </Principal>
+      <Dependent Role="OutLedger">
+        <PropertyRef Name="ProductCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="WHMS_DB_NewEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Drivers" EntityType="Self.Driver" />
+    <EntitySet Name="InLedgers" EntityType="Self.InLedger" />
+    <EntitySet Name="InLedgerLocations" EntityType="Self.InLedgerLocation" />
+    <EntitySet Name="Locations" EntityType="Self.Location" />
+    <EntitySet Name="Logistics" EntityType="Self.Logistic" />
+    <EntitySet Name="OutLedgers" EntityType="Self.OutLedger" />
+    <EntitySet Name="OutLedgerLocations" EntityType="Self.OutLedgerLocation" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Trucks" EntityType="Self.Truck" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK__Logistics__Drive__3D5E1FD2" Association="Self.FK__Logistics__Drive__3D5E1FD2">
+      <End Role="Driver" EntitySet="Drivers" />
+      <End Role="Logistics" EntitySet="Logistics" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InLedger__Produc__1FCDBCEB" Association="Self.FK__InLedger__Produc__1FCDBCEB">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="InLedger" EntitySet="InLedgers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InLedger__Userna__1ED998B2" Association="Self.FK__InLedger__Userna__1ED998B2">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="InLedger" EntitySet="InLedgers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InLedgerL__Ledge__22AA2996" Association="Self.FK__InLedgerL__Ledge__22AA2996">
+      <End Role="InLedger" EntitySet="InLedgers" />
+      <End Role="InLedgerLocation" EntitySet="InLedgerLocations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InLedgerL__Locat__239E4DCF" Association="Self.FK__InLedgerL__Locat__239E4DCF">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="InLedgerLocation" EntitySet="InLedgerLocations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OutLedger__Locat__2A4B4B5E" Association="Self.FK__OutLedger__Locat__2A4B4B5E">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="OutLedgerLocation" EntitySet="OutLedgerLocations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Logistics__Produ__403A8C7D" Association="Self.FK__Logistics__Produ__403A8C7D">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Logistics" EntitySet="Logistics" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Logistics__Truck__46E78A0C" Association="Self.FK__Logistics__Truck__46E78A0C">
+      <End Role="Truck" EntitySet="Trucks" />
+      <End Role="Logistics" EntitySet="Logistics" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OutLedger__Ledge__29572725" Association="Self.FK__OutLedger__Ledge__29572725">
+      <End Role="OutLedger" EntitySet="OutLedgers" />
+      <End Role="OutLedgerLocation" EntitySet="OutLedgerLocations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OutLedger__Produ__267ABA7A" Association="Self.FK__OutLedger__Produ__267ABA7A">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="OutLedger" EntitySet="OutLedgers" />
+    </AssociationSet>
+    <FunctionImport Name="createLogisticsRequest">
+      <Parameter Name="pcode" Mode="In" Type="Int32" />
+      <Parameter Name="pname" Mode="In" Type="String" />
+      <Parameter Name="quantity" Mode="In" Type="Int32" />
+      <Parameter Name="pnature" Mode="In" Type="String" />
+      <Parameter Name="parea" Mode="In" Type="Int32" />
+      <Parameter Name="weight" Mode="In" Type="Int32" />
+      <Parameter Name="pickup" Mode="In" Type="String" />
+      <Parameter Name="drop" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ChangePassword_CheckUser" ReturnType="Collection(Int32)">
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="pwd" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ChangePassword_CheckUserID" ReturnType="Collection(Int32)">
+      <Parameter Name="uid" Mode="In" Type="String" />
+      <Parameter Name="pwd" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ChangePassword_EMail">
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="pwd" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ChangePassword_UID">
+      <Parameter Name="uid" Mode="In" Type="String" />
+      <Parameter Name="pwd" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_display_product_details" ReturnType="Collection(WHMS_DB_NewModel.SP_display_product_details_Result)" />
+    <FunctionImport Name="sp_DisplayTruckStatus" ReturnType="Collection(WHMS_DB_NewModel.sp_DisplayTruckStatus_Result)">
+      <Parameter Name="RequestId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ForgotPassword_CheckEmail" ReturnType="Collection(Int32)">
+      <Parameter Name="email" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ForgotPassword_CheckUID" ReturnType="Collection(Int32)">
+      <Parameter Name="UID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_InsertUser">
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="EMail" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_OutLedger">
+      <Parameter Name="productcode" Mode="In" Type="Int32" />
+      <Parameter Name="deliverylocation" Mode="In" Type="String" />
+      <Parameter Name="quantity" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_UpdateQuantity">
+      <Parameter Name="productcode" Mode="In" Type="Int32" />
+      <Parameter Name="quantity" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="sp_updateUserType">
+      <Parameter Name="uid" Mode="In" Type="String" />
+      <Parameter Name="utype" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_new_locationQuery" ReturnType="Collection(WHMS_DB_NewModel.sp_new_locationQuery_Result)">
+      <Parameter Name="productCode" Mode="In" Type="Int32" />
+      <Parameter Name="Quantity" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ProductCartDetails" ReturnType="Collection(WHMS_DB_NewModel.sp_ProductCartDetails_Result)" />
+    <FunctionImport Name="sp_add_new_product">
+      <Parameter Name="productcode" Mode="In" Type="Int32" />
+      <Parameter Name="productnature" Mode="In" Type="String" />
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="currentstock" Mode="In" Type="Decimal" />
+      <Parameter Name="length" Mode="In" Type="Int32" />
+      <Parameter Name="width" Mode="In" Type="Int32" />
+      <Parameter Name="height" Mode="In" Type="Int32" />
+      <Parameter Name="weight" Mode="In" Type="Int32" />
+      <Parameter Name="productarea" Mode="In" Type="Int32" />
+      <Parameter Name="threshold" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_update_product_count">
+      <Parameter Name="productcode" Mode="In" Type="Int32" />
+      <Parameter Name="quantity" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_check_product_exit" ReturnType="Collection(WHMS_DB_NewModel.sp_check_product_exit_Result)">
+      <Parameter Name="productcode" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_check_product_exit_or_not" ReturnType="Collection(Int32)">
+      <Parameter Name="productcode" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="SP_display_product_details_Result">
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Decimal" Name="CurrentStock" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="Int32" Name="ProductCode" Nullable="false" />
+    <Property Type="Int32" Name="Threshold_Quantity" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_DisplayTruckStatus_Result">
+    <Property Type="Int32" Name="TruckNumber" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="PhoneNumber" Nullable="false" />
+    <Property Type="DateTime" Name="DeliveryDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="DeliveryLocation" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_new_locationQuery_Result">
+    <Property Type="Int32" Name="LocationID" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="StatusCode" Nullable="true" />
+    <Property Type="Int32" Name="Length" Nullable="true" />
+    <Property Type="Int32" Name="Width" Nullable="true" />
+    <Property Type="Int32" Name="Height" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_ProductCartDetails_Result">
+    <Property Type="Int32" Name="ProductCode" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="sp_check_product_exit_Result">
+    <Property Type="Int32" Name="ProductCode" Nullable="false" />
+    <Property Type="String" Name="Product_Nature" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="Decimal" Name="CurrentStock" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="Int32" Name="Length" Nullable="true" />
+    <Property Type="Int32" Name="Width" Nullable="true" />
+    <Property Type="Int32" Name="Height" Nullable="true" />
+    <Property Type="Int32" Name="Weight" Nullable="false" />
+    <Property Type="Int32" Name="Product_Area" Nullable="false" />
+    <Property Type="Int32" Name="Threshold_Quantity" Nullable="true" />
+  </ComplexType>
+</Schema>
