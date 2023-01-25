@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ce47455d6476438885906eddb04d1112" Name="Diagram1">
+        <EntityTypeShape EntityType="WHMS_DB_NewModel.Driver" Width="1.5" PointX="3.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WHMS_DB_NewModel.InLedger" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WHMS_DB_NewModel.InLedgerLocation" Width="1.5" PointX="8.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WHMS_DB_NewModel.Location" Width="1.5" PointX="6" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WHMS_DB_NewModel.Logistic" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WHMS_DB_NewModel.OutLedger" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WHMS_DB_NewModel.OutLedgerLocation" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WHMS_DB_NewModel.Product" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WHMS_DB_NewModel.Truck" Width="1.5" PointX="3.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WHMS_DB_NewModel.User" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="WHMS_DB_NewModel.FK__Logistics__Drive__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="WHMS_DB_NewModel.FK__InLedger__Produc__1FCDBCEB" ManuallyRouted="false" />
+        <AssociationConnector Association="WHMS_DB_NewModel.FK__InLedger__Userna__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="WHMS_DB_NewModel.FK__InLedgerL__Ledge__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="WHMS_DB_NewModel.FK__InLedgerL__Locat__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="WHMS_DB_NewModel.FK__OutLedger__Locat__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="WHMS_DB_NewModel.FK__Logistics__Produ__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="WHMS_DB_NewModel.FK__Logistics__Truck__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="WHMS_DB_NewModel.FK__OutLedger__Ledge__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="WHMS_DB_NewModel.FK__OutLedger__Produ__267ABA7A" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

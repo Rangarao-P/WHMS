@@ -1,0 +1,183 @@
+﻿@model WHMS_Project.Models.Logistic
+@{
+    ViewBag.Title = "LogisticsManagement";
+    Layout = "~/Views/Shared/Layout_page.cshtml";
+}
+
+
+<center><h1 style="color:white;background:rgba(0,0,0,0.5)">Logistics Management</h1></center>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+       
+        #quantity {
+            margin-left: 50px;
+        }
+        #quantity {
+            margin-left: 45px;
+        }
+
+         
+        #productCode {
+            margin-left: 14px;
+        }
+
+        #productCode {
+            margin-left: 14px;
+        }
+
+         
+        #productName {
+            margin-left: 8px;
+        }
+        #productName {
+            margin-left: 8px;
+        }
+
+         
+        #form2 {
+            margin-left: 800px;
+            margin-top: -136px;
+        }
+        #form2 {
+            margin-left: 800px;
+            margin-top: -136px;
+        }
+
+         
+        #weight {
+            margin-left: 68px;
+        }
+        #weight {
+            margin-left: 68px;
+        }
+
+         
+        #productArea {
+            margin-left: 28px;
+        }
+        #productArea {
+            margin-left: 28px;
+        }
+
+         
+        #pickup {
+            margin-left: 8px;
+        }
+        #pickup {
+            margin-left: 8px;
+        }
+
+         
+        #drop {
+           margin-left: 20px;
+        }
+        #drop {
+            margin-left: 20px;
+        }
+
+         
+        #request {
+            margin-top: 30px;
+            margin-left: 350px;
+            width: 100px;
+            
+        }
+        #request {
+            margin-top: 30px;
+            margin-left: 530px;
+            width: 100px;
+        }
+
+         
+
+        #container {
+            margin-left: 140px;
+            color: white;
+            background: rgb(128, 128, 128);
+            height: 320px;
+        }
+        #container {
+            background: rgba(0,0,0,0.5);
+        }
+
+        label{
+            color:white;
+        }
+         
+        #main-container {
+            background: rgba(0,0,0,0.5);
+            height: 280px;
+        }
+
+        
+
+
+    </style>
+
+
+
+</head>
+<body>
+
+
+
+    @if (ViewBag.Submit == false || ViewBag.Submit == null)
+    {
+        using (Html.BeginForm("SubmitRequest", "Layout", FormMethod.Post))
+        {
+
+            <br />
+           
+            
+            <div id="container">
+                <p style="color:white">Please fill in this form to create a request.</p>
+                <hr>
+                <label for="productCode"><b>Product Code</b></label>
+                <input type="text" placeholder="Enter product code" name="productcode" id="productCode" required><br /><br />
+
+                <label for="productName"><b>Product Name</b></label>
+                <input type="text" placeholder="Enter product name" name="productName" id="productName" required><br /><br />
+
+                <label for="quantity"><b>Quantity</b></label>
+                <input type="number" placeholder="Enter the quantity" name="quantity" id="quantity" required><br /><br />
+                
+                <label for="productNature"><b>Product Nature</b></label>
+
+                <select name="dropdown">
+                    <option>Liquid</option>
+                    <option>Volatile</option>
+                    <option>Perishable</option>
+                </select>
+                <div id="form2">
+
+                    <label for="productArea"><b>Product Area</b></label>
+                    <input type="number" placeholder="Enter the product area" name="productArea" id="productArea" required><br /><br />
+
+                    <label for="weight"><b>Weight</b></label>
+                    <input type="number" placeholder="Enter the weight" name="weight" id="weight" required><br /><br />
+
+                    <label for="pickup"><b>Pickup Location</b></label>
+                    <input type="text" placeholder="Enter the pickup location" name="pickup" id="pickup" required><br /><br />
+
+                    <label for="drop"><b>Drop Location</b></label>
+                    <input type="text" placeholder="Enter the drop location" name="drop" id="drop" required>
+                </div>
+                <button id="request" type="submit">Create Request</button>
+            </div>
+        }
+    }
+    else
+    {
+        <center><h1 style="color:white;background:rgba(0,0,0,0.5)">Your request has been created successfully</h1></center>
+        using (Html.BeginForm("NewRequest", "Layout", FormMethod.Post))
+        {
+            <center><input type="submit" value="New Request" / ></center>
+        }
+    }
+
+</body>
+</html>
+

@@ -1,0 +1,257 @@
+﻿
+@{
+    ViewBag.Title = "InBoundForm";
+    Layout = "~/Views/Shared/Layout_page.cshtml";
+}
+
+<html>
+<head>
+    <style>
+        input {
+            background: rgba(0,0,0,0.5);
+            border-color: lightgray;
+        }
+        #length{
+            width:40px;
+        }
+        #width{
+            width:40px;
+        }
+        #height{
+            width:40px;
+        }
+
+        #products {
+            margin: auto;
+            background-color: #5A5959;
+            width: 900px;
+            height: 450px;
+            color: white;
+        }
+       
+        #header {
+            background-color: #888483;
+            width: 350px;
+            height: 30px;
+            font-family: sans-serif;
+            padding-top: 10px;
+        }
+       
+
+
+        .button {
+            background-color: white;
+            border-color: yellow;
+            height: 32px;
+            width: 200px;
+            border-radius: 5px;
+        }
+        
+
+        table {
+            margin: auto;
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+        
+
+        td {
+            padding-left: 30px;
+        }
+       
+        #reason {
+            width: 170px;
+            height: 25px;
+        }
+        
+        #confirm_btn {
+            width: 100px;
+            height: 30px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+    </style>
+</head>
+
+
+<body>
+    <center><h4 id="header"><b>Inbound Requisition Form </b></h4></center>
+    @using (Html.BeginForm("Inboundregister", "Layout", FormMethod.Post))
+    {
+    <center>
+        <div id="products">
+            <form>
+                <br />
+                <center><h4 style="color:white"><b>Inbound Requisition Form</b></h4></center>
+                <table style="margin:10px">
+
+
+                    <tr>
+                        <td>
+                            <label>
+                                Product Name
+                            </label>
+                        </td>
+                        @*<td>
+                            <input type="text" id="product_name" />
+
+                        </td>*@
+                        <td>@Html.TextBox("product_name", null, new { required = "required" })</td>
+                       
+                        <td>
+                            <label>
+                                Supplier Name
+                            </label>
+                        </td>
+                        <td>
+                            <input type="text" id="supplier_name" />
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label>
+                                Product Code
+                            </label>
+                        </td>
+                        <td>
+                            @*<input type="text" id="product_code" />*@
+                            @Html.TextBox("product_code", null, new { required = "required" })
+                        </td>
+
+                        <td>
+                            <label>
+                                Supplier Location
+                            </label>
+                        </td>
+                        <td>
+                            <input type="text" id="supplier_location" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label>
+                                Batch no.
+                            </label>
+                        </td>
+                        <td>
+                            <input type="text" id="batch_no" />
+                        </td>
+
+                        <td>
+                            <label>
+                                Purchase Order no
+                            </label>
+                        </td>
+                        <td>
+                            <input type="text" id="purchase_order_no" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label>
+                                Product Dimensions
+                            </label>
+                        </td>
+                        <td>
+                            @*<input type="number" id="length" size="3" />
+        <input type="number" id="width" size="3" />
+        <input type="number" id="height" size="2" />*@
+                            @Html.TextBox("length", null, new { required = "required" })
+                            @Html.TextBox("width", null, new { required = "required" })
+                            @Html.TextBox("height", null, new { required = "required" })
+                        </td>
+
+                        <td>
+                            <label>
+                                Date of PO issurence
+                            </label>
+                        </td>
+                        <td>
+                            <input type="date" id="date_of_po_issurence" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>
+                                Product Weight
+                            </label>
+                        </td>
+                        <td>
+                            @*<input type="number" id="weight" />*@
+                            @Html.TextBox("weight", null, new { required = "required" })
+                        </td>
+
+                        <td>
+                            <label>
+                                Date of Delivery
+                            </label>
+                        </td>
+                        <td>
+                            <input type="date" id="dod" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>
+                                Product Qty.
+                            </label>
+
+                        </td>
+                        <td>
+                            @*<input type="number" id="product_quantity" />*@
+                            @Html.TextBox("product_quantity", null, new { required = "required" })
+                        </td>
+                        <td>
+                            <label>Threshold Qty.</label>
+                        </td>
+                        <td>
+                            @*<input type="number" id="threshold_quantity" />*@
+                            @Html.TextBox("threshold_quantity", null, new { required = "required" })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label>
+                                Product Nature
+                            </label>
+
+                        </td>
+                        <td>
+                            @*<input type="text" id="product_nature" />*@
+                            @Html.TextBox("product_nature", null, new { required = "required" })
+                        </td>
+                        <td>
+                            <label>Product Area</label>
+                        </td>
+                        <td>
+                            @*<input type="number" id="product_area" />*@
+                            @Html.TextBox("product_area", null, new { required = "required" })
+                        </td>
+                    </tr>
+
+
+                </table>
+                <br />
+                <br />
+
+
+                <div>
+                    <input type="submit" value="Confirm" id="confirm_btn" />
+                </div>
+            </form>
+        </div>
+    </center>
+    }
+</body>
+</html>
+
+
+

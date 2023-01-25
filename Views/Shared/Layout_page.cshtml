@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Style/Layout.css" rel="stylesheet" />
+    <script src="~/Script/LayOutJS.js"></script>
+    <title>@ViewBag.Title</title>
+</head>
+<body class="bg-container">
+    <ul>
+
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Product Transfer</a>
+
+            <div class="dropdown-content">
+
+                @Html.ActionLink("Product Cart", "ProductCart", "Layout")<br />
+                @Html.ActionLink("Inbound Requisition form", "InBoundForm", "Layout")<br />
+                @Html.ActionLink("Outbound Requisition form", "OutboundForm", "Layout")<br />
+                @Html.ActionLink("Product Relocation", "Relocation", "Layout")<br />
+                @Html.ActionLink("Logistics Management", "LogisticsManagement", "Layout")<br />
+                @Html.ActionLink("Truck Status", "TruckStatus", "Layout")
+
+            </div>
+        </li>
+
+        <li>@Html.ActionLink("StockIndicator", "SafetyStockIndication", "Layout")</li>
+        <li><a href="#">Profile</a></li>
+
+    </ul>
+    <div>
+        @RenderBody();
+    </div>
+
+</body>
+</html>

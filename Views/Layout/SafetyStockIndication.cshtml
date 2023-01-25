@@ -1,0 +1,63 @@
+﻿@model List<WHMS_Project.Models.SP_display_product_details_Result>
+
+@{
+    ViewBag.Title = "SafetyStockIndication";
+    Layout = "~/Views/Shared/Layout_page.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Style/SafetyStockIndication.css" rel="stylesheet" />
+    <script src="~/Script/LayOutJs.js"></script>
+    <link href="~/Style/SafetyStockIndication.css" rel="stylesheet" />
+
+
+    <title>SafetyStockIndication</title>
+</head>
+<body>
+    <br /><br />
+    <div style="background: rgba(0,0,0,0.5)">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>S.No.</th>
+                    <th>Product Code</th>
+                    <th>Product Name</th>
+                    <th>Threshold Quantity</th>
+                    <th>Current Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int i = 1; }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="color:white;text-align:center;">
+                            <label> @i</label>
+                            @{ i++; }
+                        </td>
+                        <td style="color: white; text-align: center;">
+                            @Html.DisplayFor(modelItem => item.ProductCode)
+                        </td>
+                        <td style="color:white;text-align:center;">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td style="color: white; text-align: center;">
+                            @Html.DisplayFor(modelItem => item.Threshold_Quantity)
+                        </td>
+                        <td style="color: white; text-align: center;">
+                            @Html.DisplayFor(modelItem => item.CurrentStock)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
+

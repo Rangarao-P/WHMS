@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "OutboundForm";
+    Layout = "~/Views/Shared/Layout_page.cshtml";
+
+}
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        input {
+            background-color: grey;
+            border-color: white;
+        }
+
+        #products {
+            margin: auto;
+            background-color: grey;
+            width: 50%;
+            height: 400px;
+        }
+
+        h2 {
+            background-color: lightgrey;
+            width: 300px;
+        }
+
+        th {
+            background-color: black;
+            color: White;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        #button {
+            background-color: whitesmoke;
+            width: 150px;
+        }
+
+        .button {
+            background-color: white;
+            border-color: darkgoldenrod;
+            height: 32px;
+            width: 200px;
+            border-radius: 8px;
+        }
+
+        #Locationtable {
+            margin: 50px;
+        }
+
+        #table-row:nth-child(even) {
+            background-color: #D6EEEE;
+        }
+
+        #locationtablecontainer {
+            width: 50%;
+        }
+
+    </style>
+    
+
+</head>
+<body>
+    <center><h2>Outbound Requisition Form</h2></center>
+    <div id="products">
+        <br />
+        @using (Html.BeginForm("OutboundRegister", "Layout", FormMethod.Post))
+        {
+
+
+
+            <table style="width:100%;align-items:center;">
+                <tr>
+                    <td>Product Name @Html.TextBox("ProductName", null, new { required = "required" })</td>
+                    <td>Product Code @Html.TextBox("ProductCode", null, new { required = "required" })</td>
+                </tr>
+                <tr>
+                    <td>Delivery Location @Html.TextBox("DeliveryLocation", null, new { required = "required" })</td>
+                    <td>Quantity @Html.TextBox("Quantity", null, new { required = "required" })</td>
+                </tr>
+            </table>
+            <br /><br /><br /> <br /><br /><br />
+            <center> <input style="margin-right:30px" type="submit" class="button" value="Add to Product Cart" /></center>
+        }
+    </div>
+</body>
+</html>

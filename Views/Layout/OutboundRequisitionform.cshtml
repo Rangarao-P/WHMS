@@ -1,0 +1,126 @@
+﻿
+@model List<WHMS_Project.Models.sp_new_locationQuery_Result>
+
+@{
+    ViewBag.Title = "OutboundRequisitionform";
+    Layout = "~/Views/Shared/Layout_page.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        input {
+            background-color: grey;
+            border-color: white;
+        }
+
+        #products {
+            margin: auto;
+            background-color: grey;
+            width: 50%;
+            height: 400px;
+        }
+
+        h2 {
+            background-color: lightgrey;
+            width: 300px;
+        }
+
+        th {
+            background-color: black;
+            color: White;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        #button {
+            background-color: whitesmoke;
+            width: 150px;
+        }
+
+        .button {
+            background-color: white;
+            border-color: darkgoldenrod;
+            height: 32px;
+            width: 200px;
+            border-radius: 8px;
+        }
+
+        #Locationtable {
+            margin: 50px;
+        }
+
+        #table-row:nth-child(even) {
+            background-color: #D6EEEE;
+        }
+
+        #locationtablecontainer {
+            width: 50%;
+        }
+    </style>
+    <script type="text/javascript">
+        $('body').on('click', 'input[type=checkbox]', function () {
+            alert("Checked CheckBox id is : " + $(this).attr('id'));
+        });
+    </script>
+</head>
+<body>
+    <center><h2>Outbound Requisition Form</h2></center>
+    <div id="products">
+        <br />
+        @using (Html.BeginForm("ProductCartDetails", "Layout", FormMethod.Post))
+        {
+
+            <table style="width:100%;align-items:center;">
+                <tr>
+                    <td>Product Name @Html.TextBox("ProductName", null, new { required = "required" })</td>
+                    <td>Product Code @Html.TextBox("ProductCode", null, new { required = "required" })</td>
+                </tr>
+            </table>
+            <div id="Locationtable">
+
+                @if (Model.Count <= 0)
+                {
+                    <center>
+                        <h3 class="text-danger">
+                            Product Stock is Not Availble in the Ware House
+                        </h3>
+                    </center>
+                }
+                else
+                {
+                    <center>
+                        <table id="locationtablecontainer">
+                            <tr>
+                                <th>S no</th>
+                                <th>Location</th>
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="table-row">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LocationID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                        <label class="checkbox__container">
+                                            <input type="checkbox" class="person__checkbox" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </center>
+                }
+            </div>
+            <br /><br /><br /> <br /><br /><br />
+            <center> <input style="margin-right:30px" type="submit" class="button" value="Add to Product Cart" /></center>
+        }
+    </div>
+</body>
+</html>

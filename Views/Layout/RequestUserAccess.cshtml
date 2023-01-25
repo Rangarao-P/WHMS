@@ -1,0 +1,172 @@
+﻿@model WHMS_Project.Models.User
+
+
+
+@{
+    Layout = null;
+}
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+
+
+
+
+    <title>Request User Access</title>
+    <style>
+        #empid::placeholder {
+            color: darkgrey;
+        }
+
+
+
+
+        #role::placeholder {
+            color: darkgrey;
+        }
+
+
+
+
+        #name::placeholder {
+            color: darkgrey;
+        }
+
+
+
+
+        #email::placeholder {
+            color: darkgrey;
+        }
+
+        .RUALL {
+            color: #3fb072;
+        }
+    </style>
+</head>
+<body style="background-image: url('../../Images/warehouse_bg.jpg'); height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover; opacity: 1.0;">
+    <div class="container mt-5">
+        <h1 style="color: #09f6e1; " class="text-center mb-5">WARE-YOU-GO</h1>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h5 style="color: #09f6e1; " class="text-center mb-4">Digitilization of Mordern Warehouses</h5>
+                <div style="width : 500px; height: 550px; background :rgba(0,0,0,0.5); padding : 60px ;   ">
+                    @using (Html.BeginForm("Request_User_Access", "Layout", FormMethod.Post))
+                    {
+                        <h3 style="color: white;" class="text-center mb-4">Request User Access</h3>
+                        <br />
+
+
+
+
+
+
+
+                        @*<div class="form-group">
+                            <input type="text" style="border: none; background: rgba(0,0,0,0.1); margin: 10px; padding: 20px; border: solid 1px white; text-align: center; color: white" class="form-control" id="role" placeholder="Select your role" list="options">
+                            <select style="border: none; background: rgba(0,0,0,0.1); margin: 10px; padding: 20px; border: solid 1px white; text-align: center; color: white" class="form-control" name="role" id="options">
+                            <option value="Warehouse Operator">Warehouse Operator</option>
+                            <option value="Warehouse Manager">Warehouse Manager</option>
+                            </select>
+
+
+
+                                                        </div>*@
+
+
+
+                        <div class="form-group">
+                            <input type="text" name="roleopt" style="border: none;background: rgba(0,0,0,0.1); margin: 10px; padding: 20px; border: solid 1px white; text-align: center; color: white" class="form-control" id="role" placeholder="Select your role" list="options">
+                            <datalist id="options">
+                                <option value="Warehouse Operator">
+                                <option value="Warehouse Manager">
+
+
+
+                            </datalist>
+                        </div>
+
+
+
+
+                        @*<div class="form-group">
+                            <input type="text" style="border: none; background: rgba(0,0,0,0.1); margin: 10px; padding: 20px; border: solid 1px white; text-align: center; color: white" class="form-control" id="name" placeholder="Enter your name">
+                            </div>*@
+
+
+
+
+                        @*<div class="form-group">
+                            <input type="email" style="border: none; background: rgba(0,0,0,0.1); margin: 10px; padding: 20px; border: solid 1px white; text-align: center; color: white" class="form-control" id="email" placeholder="Enter your email">
+                            </div>*@
+
+
+
+
+                        <div class="form-group">
+                            <input type="text" required style="border: none; background: rgba(0,0,0,0.1); margin: 10px; padding: 20px; border: solid 1px white; text-align: center; color: white" class="form-control" id="empid" name="username" placeholder="Enter your Username">
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <input type="password" required style="border: none; background: rgba(0,0,0,0.1); margin: 10px; padding: 20px; border: solid 1px white; text-align: center; color: white" class="form-control" id="empid" name="password" placeholder="Enter your password">
+                        </div>
+
+
+
+
+
+                        <br>
+
+
+
+
+
+                        <div class="form-group form-check">
+                            <input type="submit" class="w3-button w3-round-large" style="margin-left:110px ;padding:5px" name="name" value="Request for Access" />
+                            @*<button type="button" class="w3-button w3-round-large" style="margin-left:110px ;padding:5px">Request for Access</button>*@&nbsp;&nbsp;
+                            <br> <br>
+
+
+
+
+
+                            <center>
+                                @*<p style="display:inline;color:white"><strong>Already a user |</strong></p>*@<label> <strong><u> @*<a href="login.html" style="align-content:center; color: white" class="btn btn-link btn-block mt-3">Login</a>*@</u></strong></label>
+                                <p style="display:inline;color:white"><strong>Already a user |</strong></p><label> <strong><u>@Html.ActionLink("Login", "Login", "Layout", null, new { @class = "RUALL" })</u></strong></label>
+                            </center>
+
+
+
+
+
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+</body>
+</html>

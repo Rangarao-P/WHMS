@@ -1,0 +1,51 @@
+﻿input {
+    background-color: grey;
+    border-color: white;
+}
+
+#products {
+    margin: auto;
+    background-color: grey;
+    width: 50%;
+    height: 400px;
+}
+
+h2 {
+    background-color: lightgrey;
+    width: 300px;
+}
+
+th {
+    background-color: black;
+    color: White;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+#button {
+    background-color: whitesmoke;
+    width: 150px;
+}
+
+.button {
+    background-color: white;
+    border-color: darkgoldenrod;
+    height: 32px;
+    width: 200px;
+    border-radius: 8px;
+}
+
+#Locationtable {
+    margin: 50px;
+}
+
+#table-row:nth-child(even) {
+    background-color: #D6EEEE;
+}
+
+#locationtablecontainer {
+    width: 50%;
+}

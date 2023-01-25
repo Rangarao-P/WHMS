@@ -1,0 +1,162 @@
+﻿@model List<WHMS_Project.Models.sp_DisplayTruckStatus_Result>
+@{
+    ViewBag.Title = "TruckStatus";
+    Layout = "~/Views/Shared/Layout_page.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @*<link href="~/Style/TruckStatus.css" rel="stylesheet" />*@
+    <script src="~/Script/LayOutJs.js"></script>
+    @*<link href="~/Style/TruckStatus.css" rel="stylesheet" />*@
+    <title>Truck Status</title>
+    <style>
+
+
+
+        .search-container {
+            width: 490px;
+            display: block;
+            margin: 0 auto;
+        }
+
+
+        input#search-bar {
+            margin: 0 auto;
+            width: 100%;
+            height: 45px;
+            padding: 0 20px;
+            font-size: 0.75rem;
+            border: 1px solid orange;
+            outline: none;
+            &:focus  
+
+        {
+            border: 1px solid #008ABF;
+            transition: 0.35s ease;
+            color: #008ABF;
+            &::-webkit-input-placeholder  
+
+        {
+            transition: opacity 0.45s ease;
+            opacity: 0;
+        }
+
+        }
+        }
+
+
+
+
+
+        .search-icon {
+            position: relative;
+            float: right;
+            width: 75px;
+            height: 75px;
+            top: -62px;
+            right: -45px;
+        }
+
+
+        #Truck-details {
+            color: white;
+            position: center;
+            top: 30%;
+            width: 80%;
+            height: 25%;
+            background-size: 50px 50px;
+            
+        }
+
+        table {
+            background-color: rgba(0,0,0,0.5);
+            text-align: center;
+            margin-left: 300px;
+            color: white;
+           
+        }
+
+        th {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <br />
+    <div style="height:40px;width:505px;" class="search-container">
+        @using (Html.BeginForm("Truck_Status", "LayOut", FormMethod.Post))
+        {
+            <span style="color:red"><b>Enter Request Id</b></span>@Html.TextBox("RequestId")
+            @*<input type="text" name="RequestId"/>*@
+
+            <input type='submit' value='Submit' />
+
+        }
+
+    </div>
+    <br />
+    <div id="Truck-details">
+        <table>
+            <thead>
+
+
+
+                <tr>
+                    <th>Truck Number</th>
+                    <th>Driver Name</th>
+                    <th>Driver PhoneNumber</th>
+                    <th>Delivery Date</th>
+                    <th>Delivery Location</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model == null)
+                {
+                    <tr>
+                        <td style="color: white"><center>NA</center></td>
+                        <td style="color: white"><center>NA</center></td>
+                        <td style="color: white"><center>NA</center></td>
+                        <td style="color: white"><center>NA</center></td>
+                        <td style="color: white"><center>NA</center></td>
+
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="color: white; text-align: center;">
+                                @Html.DisplayFor(modelItem => item.TruckNumber)
+                            </td>
+                            <td style="color:white;text-align:center;">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td style="color: white; text-align: center;">
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </td>
+                            <td style="color: white; text-align: center;">
+                                @Html.DisplayFor(modelItem => item.DeliveryDate)
+                            </td>
+
+                            <td style="color: white; text-align: center;">
+                                @Html.DisplayFor(modelItem => item.DeliveryLocation)
+                            </td>
+
+
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
+

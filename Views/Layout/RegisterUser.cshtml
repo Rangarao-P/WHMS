@@ -1,0 +1,169 @@
+﻿@model WHMS_Project.Models.User
+
+
+
+@{
+    Layout = null;
+}
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+
+
+
+
+
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+    <script>
+
+
+
+        function validatePasswords() {
+            var newPassword = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("cnfpassword").value;
+            if (newPassword != confirmPassword) {
+                alert("New password and confirm new password must be the same!");
+                return;
+            }
+        }
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+    <title>New User Registration</title>
+    <style>
+
+
+
+
+
+        #username::placeholder {
+            color: darkgrey;
+        }
+
+
+
+
+
+        #password::placeholder {
+            color: darkgrey;
+        }
+
+
+
+        #Name::placeholder {
+            color: darkgrey;
+        }
+
+
+
+        #EMail::placeholder {
+            color: darkgrey;
+        }
+    </style>
+</head>
+<body style="background-image: url('../../Images/warehouse_bg.jpg'); height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover; opacity: 1.0;">
+    <div class="container mt-5">
+        <h1 style="color: #09f6e1; " class="text-center mb-5">WARE-YOU-GO</h1>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h5 style="color: #09f6e1; " class="text-center mb-4">Digitilization of Mordern Warehouses</h5>
+                <div style="width : 500px; height: 500px; background :rgba(0,0,0,0.5); padding : 30px ;   ">
+                    @using (Html.BeginForm("RegisteruserData", "Layout", FormMethod.Post))
+                    {
+                        <br /><br /><br />
+                        <div class="form-group">
+                            <input type="text" required style="border: none; padding-block: 20px; border-bottom: white 2px dashed; background: rgba(0,0,0,0.1); text-align: center  ; color: white" class="form-control" id="Name" name="name" placeholder="Enter your name">
+                        </div>
+
+
+
+
+
+
+
+                        <div class="form-group">
+                            <input type="text" required style="border: none; padding-block: 20px; background: rgba(0,0,0,0.1); border-bottom: white 2px dashed; text-align: center; color: white" class="form-control" id="Username" name="username" placeholder="Enter your username">
+                        </div>
+
+
+
+
+
+
+
+                        <div class="form-group">
+                            <input type="password" required style="border: none; padding-block: 20px; background: rgba(0,0,0,0.1); border-bottom: white 2px dashed; text-align: center; color: white" class="form-control" id="password" name="password" placeholder="Enter your password">
+                        </div>
+
+
+
+
+
+
+
+                        <div class="form-group">
+                            <input type="password" required style="border: none; padding-block: 20px; background: rgba(0,0,0,0.1); border-bottom: white 2px dashed; text-align: center; color: white" class="form-control" id="cnfpassword" name="cnfpassword" onblur="validatePasswords()" placeholder="Re-enter your password">
+                        </div>
+
+
+
+
+
+
+
+                        <div class="form-group">
+                            <input type="email" style="border: none; padding-block: 20px; background: rgba(0,0,0,0.1); border-bottom: white 2px dashed; text-align: center; color: white" class="form-control" id="EMail" name="email" placeholder="Enter your email">
+                        </div>
+
+
+
+
+
+
+
+                        <br>
+                        <div class="form-group form-check">
+                            <button type="submit" class="btn btn-primary" style="color: black; background :white; height: 40px; width: 120px;display: block; margin: auto;"><strong>SIGN UP</strong></button>
+
+
+
+
+
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
